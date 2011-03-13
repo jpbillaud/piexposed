@@ -9,20 +9,24 @@
  */
 
 void
-tlist_flatten(struct t_list_node *head, struct t_list_node *tail)
+tlist_flatten(struct t_list_node *head, struct t_list_node **tail)
 {
+   struct t_list_node *ptail = *tail;
+
    for (; head; head = head->next) {
       struct t_list_node *child = head->child;
 
       if (child) {
-         tail->next = child;
-         child->prev = tail;
+         ptail->next = child;
+         child->prev = ptail;
 
          while (child->next) {
             child = child->next;
          }
 
-         tail = child;
+         ptail = child;
       }
    }
+
+   *tail = ptail;
 }
