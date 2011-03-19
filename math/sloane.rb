@@ -27,6 +27,5 @@ puts sloane.inspect
   new_sloane << rep_digit
   new_sloane << last_sum
 
-  sloane.replace new_sloane
-  puts sloane.reverse.inspect
+  puts sloane.replace(new_sloane).reverse.inspect
 end
