@@ -2,6 +2,9 @@
 
 /*
  * Write a function that deletes a set of characters from a string.
+ * For example, given a string of "Battle of the Vowels: Hawaii vs. Grozny"
+ * and removing the characters "aeiou", the function should transform the string
+ * to "Bttl f th Vwls: Hw vs. Grzny".
  */
 
 void
