@@ -23,7 +23,7 @@ do_permute_str(char *str,
    int idx;
 
    if (pos == arr_len) {
-      // process the string here.
+      // print the permutation here
       return;
    }
 
@@ -58,6 +58,9 @@ permute_str(char *str)
    memset(mark_arr, 0, arr_len);
 
    do_permute_str(str, result_str, mark_arr, 0, arr_len - 1);
+
+   free(mark_arr);
+   free(result_str);
 
    return 0;
 }
