@@ -5,24 +5,25 @@
 void
 b_tree_breadth_first_traversal(struct b_tree_node_t *root)
 {
-   lifo_t lifo;
+   fifo_t fifo;
 
-   lifo_init(&lifo);
+   fifo_init(&fifo);
 
-   lifo_push(&lifo, root);
+   fifo_push(&fifo, root);
 
    do {
-      root = lifo_pop(&lifo);
+      root = fifo_pop(&fifo);
+
       if (root == NULL) {
          continue;
       }
 
-      if (root->right) {
-         lifo_push(&lifo, root->right);
-      }
-      
       if (root->left) {
-         lifo_push(&lifo, root->left);
+         fifo_push(&fifo, root->left);
+      }
+
+      if (root->right) {
+         fifo_push(&fifo, root->right);
       }
 
    } while (root);

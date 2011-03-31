@@ -6,24 +6,25 @@ void
 btree_depth_first_traversal_iterative(struct b_tree_node_t *root)
 {
    struct b_tree_node_t *node;
-   fifo_t fifo;
+   lifo_t lifo;
 
-   fifo_init(&fifo);
+   lifo_init(&lifo);
 
-   fifo_push(&fifo, root);
+   lifo_push(&lifo, root);
 
    do {
-      root = fifo_pop(&fifo);
+      root = lifo_pop(&lifo);
+
       if (root == NULL) {
          continue;
       }
 
       if (root->right) {
-         fifo_push(&fifo, root->right);
+         lifo_push(&lifo, root->right);
       }
       
       if (root->left) {
-         fifo_push(&fifo, root->left);
+         lifo_push(&lifo, root->left);
       }
 
    } while (root);
