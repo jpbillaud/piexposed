@@ -10,61 +10,32 @@
  */
 
 static void
-do_combine_str(char *str,
-               char *result_str,
-               char *mark_arr,
-               int pos,
-               int combine_len)
+do_combine_str(char *str, char *result_str, int start, int pos, int str_len)
 {
    int idx;
 
-   if (!combine_len) {
+   for (idx = start; idx < str_len; idx++) {
+      result_str[pos] = str[idx];
       // print the combination here
-      return;
+      do_combine_str(str, result_str, idx + 1, pos + 1, str_len);
    }
-
-   for (idx = 0; idx < strlen(str); idx++) {
-
-      if (idx + combine_len > strlen(str)) {
-         return;
-      }
-
-      if (!mark_arr[idx]) {
-         mark_arr[idx] = 1;
-         result_str[pos] = str[idx];
-         do_combine_str(str, result_str, mark_arr, pos + 1, combine_len - 1);
-         memset(mark_arr + idx + 1, 0, strlen(str) - idx - 1);
-      }
-   }
+   result_str[pos] = '\0';
 }
 
 int
 combine_str(char *str)
 {
-   int combine_len;
    char *result_str;
-   char *mark_arr;
+   int str_len = strlen(str);
 
-   for (combine_len = 1; combine_len <= strlen(str); combine_len++) {
-
-      result_str = malloc(combine_len + 1);
-      if (!result_str) {
-         return -1;
-      }
-      memset(result_str, 0, combine_len + 1);
-
-      mark_arr = malloc(strlen(str));
-      if (!mark_arr) {
-         free(result_str);
-         return -1;
-      }
-      memset(mark_arr, 0, strlen(str));
-
-      do_combine_str(str, result_str, mark_arr, 0, combine_len);
-
-      free(mark_arr);
-      free(result_str);
+   result_str = malloc(str_len + 1);
+   if (!result_str) {
+      return -1;
    }
+   memset(result_str, 0, str_len + 1);
 
+   do_combine_str(str, result_str, 0, 0, str_len);
+
+   free(result_str);
    return 0;
 }
