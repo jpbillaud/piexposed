@@ -1,0 +1,11 @@
+-- Question --
+
+Suppose you are in a hallway lined with 100 closed lockers. You begin by opening all 100 lockers. Next, you close every second locker. Then you go to every third locker and close if it is open or open if it is closed (call this toggling the locker). You continue toggling every nth locker on pass number n. After your hundredth pass of the hallway, in which you toggle only locker number 100, how many lockers are opened?
+
+In a hall with k lockers, how many lockers remain open after pass k?
+
+-- Solution --
+
+The lockers that will be closed at the end are the lockers with an even number of factors since it means that they will be processed by an even number of iterations. Therefore the lockers open at the end are the ones with an odd number of factors which means they have to be perfect square. Indeed, that's the only case where factors will be repeated for instance 4 = 2x2.
+
+So in a hall with k lockers, the number of lockers open are the numbers of perfect square lower or equal to k. That can be summed up by floor(sqrt(k)).
