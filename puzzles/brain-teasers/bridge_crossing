@@ -1,0 +1,27 @@
+-- Question --
+
+A party of four travelers comes to a rickety bridge at night. The bridge can hold the weight of at most two of the travelers at a time, and it cannot be crossed without using a flashlight. The travelers have one flashlight among them. Each traveler walks at a different speed: The first can cross the bridge in 1 minute, the second in 2 minutes, the third in 5 minutes, and the fourth takes 10 minutes to cross the bridge. If two travelers cross together, they walk at the speed of the slower traveler.
+
+What is the least amount of time in which all the travelers can cross from one side of the bridge to the other?
+
+-- Solution --
+
+Crossing the bridge means that two travelers need to go with the flashlight and one of them returns it back. The most logical arrangement is to have 1 doing all the roundtrips:
+
+Round 1: 1 + 2  => 2mn
+Round 2: 1      => 1mn
+Round 3: 1 + 5  => 5mn
+Round 4: 1      => 1mn
+Round 5: 1 + 10 => 10mn
+                  ------
+                   19mn
+
+There is a better arrangement actually. One optimization would be to minimize the cost of sending 5 & 10 over. If we send them together that will cost us 10mn instead of 15mn.
+
+Round 1: 1 + 2  => 2mn
+Round 2: 1      => 1mn
+Round 3: 10 + 5 => 10mn
+Round 4: 2      => 2mn
+Round 5: 1 + 2  => 2mn
+                  ------
+                   17mn
