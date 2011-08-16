@@ -1,0 +1,15 @@
+-- Question --
+
+You have eight marbles and a two-pan balance. All the marbles weigh the same, except for one, which is heavier than all the others. THe marbles are otherwise indistinguishable. You may make no assumptions about how much heavier the heavy marble is.
+
+What is the minimum number of weighings needed to be certain of identifying the heavy marble?
+
+-- Solution --
+
+The naive solution is to do a binary search. We put 4 on each pan and remove the lightest group, then divide by 2 again and so on and so forth until we have 1 marble per pan. This therefore requires 3 weighings.
+
+A better approach is to divide the 8 marbles into 3 groups: 2 groups of 3 and 1 group of 2. First put each group of 3 into one pan. If both pans have the same weight then just take the group of 2 and put 1 marble per pan to find out which one is the heaviest.
+
+If not equal in weight, remove the lightest group of 3. Then divide the heaviest group of 3 into 1 group of 2 and 1 group of 1. Out of the group of 2, put 1 marble into each pan. If both pans have same weight then the remaining marble is the heaviest, otherwise the heaviest pan contains the heaviest marble.
+
+This later method requires 2 weighings only.
