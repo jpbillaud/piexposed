@@ -4,6 +4,8 @@ You have eight marbles and a two-pan balance. All the marbles weigh the same, ex
 
 What is the minimum number of weighings needed to be certain of identifying the heavy marble?
 
+Generalize your solution. What is the minimum number of weighings to find a heavy marble among n marbles?
+
 -- Solution --
 
 The naive solution is to do a binary search. We put 4 on each pan and remove the lightest group, then divide by 2 again and so on and so forth until we have 1 marble per pan. This therefore requires 3 weighings.
@@ -13,3 +15,7 @@ A better approach is to divide the 8 marbles into 3 groups: 2 groups of 3 and 1 
 If not equal in weight, remove the lightest group of 3. Then divide the heaviest group of 3 into 1 group of 2 and 1 group of 1. Out of the group of 2, put 1 marble into each pan. If both pans have same weight then the remaining marble is the heaviest, otherwise the heaviest pan contains the heaviest marble.
 
 This later method requires 2 weighings only.
+
+Then to generalize this to an arbitrary n we just need to think about what we are actually doing here. Every weighings we remove 2/3 of the marbles as opposed to only a half. Therefore the number of weighings would be the number of time we have to divide n by 3 to get to 1. Or more simply how many times we need to multiple 1 by 3 to get to n.
+
+If we have n a multiple of 3, then n = 3^i and i = log3(n). For n = 9, it takes 2 weighings to find the heavy marble. If n is not a multiple of 3 then we have to assume the worst case which means that the number of weighings is equal to ceiling(log3(n)).
