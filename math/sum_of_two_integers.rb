@@ -8,7 +8,7 @@ numbers. If not, return an indication that no such integers exist.
 
 @nums = [ 1, 4, 7, 3, 2, 1 ]
 
-def sum_of_two_integers nums, target
+def sum_of_two_integers target
 
   # We start sorting the array in nlog(n)
   @nums.sort!
@@ -23,7 +23,7 @@ def sum_of_two_integers nums, target
   while !@nums.empty? do
     case @nums.first + @nums.last
     when target then return [ @nums.first, @nums.last ]
-    when 0..target-1 then @nums.pop
+    when 0..target-1 then @nums.slice! 0
     else @nums.slice! -1
     end
   end
