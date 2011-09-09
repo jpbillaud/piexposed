@@ -23,10 +23,9 @@ class PhoneNumber
                     ["G", "H", "I"],
                     ["J", "K", "L"],
                     ["M", "N", "O"],
-                    ["P", "Q", "R"],
-                    ["S", "T", "U"],
-                    ["V", "W", "X"],
-                    ["X", "Y", "Z"] ]
+                    ["P", "Q", "R", "S"],
+                    ["T", "U", "V"],
+                    ["W", "X", "Y", "Z"] ]
 
   def initialize number
     @number = number
