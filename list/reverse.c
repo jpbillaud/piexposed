@@ -13,7 +13,6 @@ slist_reverse(struct s_list_node *head)
 
    for (prev = NULL, ptr = head; ptr; prev = ptr, ptr = next) {
       next = ptr->next;
-
       ptr->next = prev;
    }
 

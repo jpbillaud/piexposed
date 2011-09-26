@@ -11,10 +11,11 @@ slist_remove_all_with_val(struct s_list_node *head, void *data)
 {
    struct s_list_node *prev, *ptr, *next;
 
-   for (prev = NULL, ptr = head; ptr; prev = ptr, ptr = next) {
+   for (prev = NULL, ptr = head; ptr; ptr = next) {
       next = ptr->next;
 
       if (ptr->data != data) {
+         prev = ptr;
          continue;
       }
 
