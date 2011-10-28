@@ -1,0 +1,14 @@
+-- Question --
+
+Given the following:
+
+* a file with 1 million entries each entry is unique with a number in ASCII ranging from 0..10 million
+* a memory with 2 megabytes
+
+find an efficient algorithm to sort this file.
+
+-- Solution --
+
+A simple count sort in this case works fine.
+
+Just have a bitset of 10 millions bits and go through the file. For each entry encountered just flag the corresponding bit in the bitset. Go through the bitset in increasing order and you get the entries in sorted order. The whole thing requires linear time.
