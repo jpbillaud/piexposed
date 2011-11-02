@@ -41,19 +41,19 @@ def string_reduct word
   return map.first[:occurence] if map.size == 1
 
   #
-  # Select the most populated region and find its direct most populated neighbors.
+  # Select the most populated region and find its direct most populated neighbor.
   #
   region = map.max do |x,y|
     x[:occurence] <=> y[:occurence]
   end
 
-  left_neighbor = map.at(region[:index]-1) || { :occurence => -1 }
+  left_neighbor = map.at((region[:index]-1).abs) || { :occurence => -1 }
   right_neighbor = map.at(region[:index]+1) || { :occurence => -1 }
 
   neighbor = [ right_neighbor, left_neighbor ].max do |x,y|
     x[:occurence] <=> y[:occurence]
   end
-  
+
   #
   # Insert the character resulting from the reduction
   #
