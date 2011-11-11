@@ -3,7 +3,7 @@
 #include "list.h"
 
 /*
- * Reverse a given a singly-linked list.
+ * Reverse a given singly-linked list.
  */
 
 struct s_list_node *
