@@ -7,12 +7,21 @@ def periodic_string? word
 
   #
   # The easiest way to deal with this is to iteratively increase the pattern,
-  # one character at a time. The implementation below is not efficient because
-  # it is going through the entire word every single time due to gsub, while in reality
-  # we should stop as soon as the pattern is not replicated.
+  # one character at a time. Note that some patterns do no make sense to try
+  # so we just skip them.
+  #
+
+  #
+  # No point to test a pattern size bigger than half of the given word.
   #
   (0..word.size/2).each do |index|
-    return true if word.gsub(/#{word.slice(0..index)}/, "").empty?
+
+    #
+    # If the pattern size does not fit perfeclty we just skip it.
+    #
+    next if word.size.modulo(index+1) != 0
+    nb_patterns = word.size / (index+1)
+    return true if word.slice(0..index)*nb_patterns == word
   end
   false
 end
