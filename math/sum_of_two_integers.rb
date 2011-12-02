@@ -20,7 +20,7 @@ def sum_of_two_integers target
   #    and do the next iteration
   # 3- If the sums is on the target then we return a tuple
 
-  while !@nums.empty? do
+  while @nums.size != 1 do
     case @nums.first + @nums.last
     when target then return [ @nums.first, @nums.last ]
     when 0..target-1 then @nums.slice! 0
