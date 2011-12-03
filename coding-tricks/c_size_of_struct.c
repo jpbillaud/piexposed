@@ -4,12 +4,7 @@
  * Write a C program to find the size of structure without using sizeof operator
  */
 
-#define SIZE_OF_STRUCT(mystruct)     \
-   ({ struct nested_##mystruct {     \
-         struct mystruct s;          \
-         char end[0];                \
-      } __attribute__((packed)) var; \
-      var.end - (char *)&var; })
+#define SIZE_OF_STRUCT(mystruct) (size_t)((struct mystruct*)0+1)
 
 void main()
 {
