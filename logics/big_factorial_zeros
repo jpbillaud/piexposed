@@ -1,0 +1,11 @@
+-- Question --
+
+Without using a calculator, how many zeros are at the end of "100!"?
+
+-- Solution --
+
+The trick here is not to calculate 100! on your calculator (which only gives you ten digits of accuracy), but to figure out how high a power of 10 goes into 100! evenly. For every trailing zero, there is a power of 10 that divides 100! evenly. In order to do that, since 10 = 2*5, we need to figure the highest powers of 2 and 5 dividing 100! and take the lesser of the two exponents.
+
+(Why?) Consider what happens when we multiply together 1*2*3*4*5*6*..., starting with the lowest numbers first. Every fifth number, starting with 5, is divisible by 5. That gives you 100/5 = 20 factors of 5 in 100!. But there are more. Every 25th number, starting with 25, has an extra factor of 5 beyond the ones already counted. That gives you 100/25 = 4 more factors of 5 in 100!. To get a third factor of 5 from a single number, it has to be a multiple of 125, and no number <= 100 is, so that is all.
+
+The answer is: 24
