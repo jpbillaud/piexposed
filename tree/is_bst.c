@@ -14,7 +14,7 @@ btree_is_bst_rec(struct b_tree_node_t *root, int *pmin, int *pmax)
    int lmax = 0, rmax = 0;
 
    if (root->left) {
-      if (!is_bst(root->left, &lmin, &lmax)) {
+      if (!btree_is_bst_rec(root->left, &lmin, &lmax)) {
          return 0;
       }
 
@@ -24,7 +24,7 @@ btree_is_bst_rec(struct b_tree_node_t *root, int *pmin, int *pmax)
    }
 
    if (root->right) {
-      if (!is_bst(root->right, &rmin, &rmax)) {
+      if (!btree_is_bst_rec(root->right, &rmin, &rmax)) {
          return 0;
       }
 
@@ -39,8 +39,19 @@ btree_is_bst_rec(struct b_tree_node_t *root, int *pmin, int *pmax)
 }
 
 int
-btree_is_bst(struct b_tree_node_t *root) 
+btree_is_bst(struct b_tree_node_t *root)
 {
    int min, max;
    return btree_is_bst_rec(root, &min, &max);
+}
+
+int main()
+{
+  struct b_tree_node_t *bst_root = DF_NODE(10, DF_NODE(6, DF_LEAF(3), DF_LEAF(7)), DF_NODE(12, DF_LEAF(11), DF_LEAF(15)));
+  struct b_tree_node_t *non_bst_root = DF_NODE(10, DF_NODE(6, DF_LEAF(7), DF_LEAF(3)), DF_NODE(12, DF_LEAF(11), DF_LEAF(15)));
+  struct b_tree_node_t *non_bst_root_2 = DF_NODE(10, DF_NODE(6, DF_LEAF(3), DF_LEAF(7)), DF_NODE(12, DF_LEAF(9), DF_LEAF(15)));
+
+  printf("is bst %u\n", btree_is_bst(bst_root));
+  printf("is bst %u\n", btree_is_bst(non_bst_root));
+  printf("is bst %u\n", btree_is_bst(non_bst_root_2));
 }

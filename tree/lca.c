@@ -41,3 +41,14 @@ btree_lca(struct b_tree_node_t *root,
    */
   return p1 ? p1 : p2;
 }
+
+int main()
+{
+  struct b_tree_node_t *root = DF_NODE(10, DF_NODE(6, DF_LEAF(3), DF_LEAF(7)), DF_NODE(12, DF_LEAF(11), DF_LEAF(15)));
+
+  printf("lca of 3 and 7 is %u\n", btree_lca(root, 3, 7)->value);
+  printf("lca of 6 and 7 is %u\n", btree_lca(root, 6, 7)->value);
+  printf("lca of 11 and 3 is %u\n", btree_lca(root, 11, 3)->value);
+
+  return 0;
+}
