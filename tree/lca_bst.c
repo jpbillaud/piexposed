@@ -1,5 +1,3 @@
-#include <stdlib.h>
-
 #include "tree.h"
 
 /*
@@ -8,9 +6,9 @@
  */
 
 struct b_tree_node_t *
-btree_lowest_common_ancestor(struct b_tree_node_t *root,
-                             int val1,
-                             int val2)
+btree_lca_bst(struct b_tree_node_t *root,
+              int val1,
+              int val2)
 {
    while (1) {
 
