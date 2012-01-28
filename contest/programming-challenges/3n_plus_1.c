@@ -4,7 +4,7 @@
 #include <map>
 
 /*
- * The 3n+1 problem (110101) (challenge from www.programming-challenges.com)
+ * The "3n+1" problem (110101) (challenge from www.programming-challenges.com)
  *
  * Consider the following algorithm to generate a sequence of numbers.
  * Start with an integer n. If n is even, divide by 2. If n is odd, multiply

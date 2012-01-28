@@ -1,5 +1,5 @@
 =begin
-(Challenge from www.interviewstreet.com)
+The "string reduction" problem (challenge from www.interviewstreet.com)
 
 Given a string consisting of a, b and c's, we can perform the following operation:
 Take any two adjacent distinct characters and replace it with the third character.
