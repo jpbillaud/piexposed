@@ -1,8 +1,11 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 /*
  * Write a function that implements a minimum regexp engine
- * where only '.', '*' and '.*' are supported.
+ * where only '.', '*' and '.*' are supported assuming each
+ * pattern requires beginning to end matching (not anywhere matching).
  *
  * For instance:
  *
@@ -22,54 +25,32 @@ int string_match_regexp(char *str, char *pattern)
 {
    /*
     * If we ever reached the end of the pattern then
-    * there is match.
+    * there might be a match depending if we also
+    * reached the end of string see last statement
+    * of this function.
     */
-
    while (*pattern) {
 
       /*
        * If the next character is a wildcard then
-       * we try to vacuum whatever we can on the way
+       * we call recursively into the regexp engine
+       * until we ate enough characters on the way i.e.
+       * until the underlying recursive path succeed
+       * or there is no eligible character to be eaten
+       * anymore.
+       *
+       * This is the "backtracking" piece of the code 
+       * since if the underlying call fails we step back
+       * and try again with another character taken out of
+       * the way.
        */
       if (*(pattern + 1) == '*') {
-
-         /*
-          * If the wildcard applies to '.' then whatever
-          * is the current character pointed by str will
-          * be used to vacuum.
-          */
-         char match = (*pattern == '.') ? *str : *pattern;
-         int count = 0;
-
-         /*
-          * If the characters after the wildcard are matching
-          * the character we are supposed to vacuum then
-          * we need to make sure we at least vacuum this much.
-          *
-          * That's mainly to deal with pattern looking like
-          * 'b*bbb'.
-          */
+         while (*str && (*pattern == *str || *pattern == '.')) {
+            if (string_match_regexp(str++, pattern+2)) {
+               return 1;
+            }
+         }
          pattern += 2;
-         while (*pattern && *pattern == match) {
-            pattern++;
-            count++;
-         }
-
-         /*
-          * Vacuum as much as we can.
-          */
-         while (*str == match) {
-            str++;
-            count--;
-         }
-         
-         /*
-          * Too bad we could not find enough matching characters
-          * so let's bail out.
-          */
-         if (count > 0) {
-            return 0;
-         }
       } else {
          /*
           * The easy part, if the character pointed by str diverges
@@ -77,9 +58,7 @@ int string_match_regexp(char *str, char *pattern)
           * except if pattern points to '.' in which case we keep
           * going.
           */
-
-         if (*pattern != '.' &&
-             *str != *pattern) {
+         if (*pattern != '.' && *str != *pattern) {
             return 0;
          }
 
@@ -88,7 +67,10 @@ int string_match_regexp(char *str, char *pattern)
       }
    }
 
-   return 1;
+   /*
+    * Only match if we reached the end of the string as well...
+    */
+   return (*str) ? 0 : 1;
 }
 
 int main()
@@ -103,4 +85,10 @@ int main()
    printf("%u\n", string_match_regexp("bbd", ".*bbd"));
    printf("%u\n", string_match_regexp("bbd", ".*cbd"));
    printf("%u\n", string_match_regexp("", ".*"));
+   printf("%u\n", string_match_regexp("", ".*c*"));
+   printf("%u\n", string_match_regexp("bbbbdbdbdaac", ".*d"));
+   printf("%u\n", string_match_regexp("bbbb", "b*c*"));
+   printf("%u\n", string_match_regexp("bbbb", "b*b*c*"));
+   printf("%u\n", string_match_regexp("abcd", ".*d"));
+   printf("%u\n", string_match_regexp("abcd", ".*d*c*c*e*hhh*j*.*c*h"));
 }
