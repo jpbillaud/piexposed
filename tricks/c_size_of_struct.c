@@ -6,13 +6,15 @@
 
 #define SIZE_OF_STRUCT(mystruct) (size_t)((struct mystruct*)0+1)
 
-void main()
+int main()
 {
    struct mystruct {
       int c;
    };
-   
-   printf("size %d\n", SIZE_OF_STRUCT(mystruct));
+
+   printf("size %lu\n", SIZE_OF_STRUCT(mystruct));
+
+   return 0;
 }
 
 
