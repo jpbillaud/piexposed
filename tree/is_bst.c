@@ -32,11 +32,11 @@ btree_is_bst(struct b_tree_node_t *root)
 
 int main()
 {
-  struct b_tree_node_t *bst_root = DF_NODE(10, DF_NODE(6, DF_LEAF(3), DF_LEAF(7)), DF_NODE(12, DF_LEAF(11), DF_LEAF(15)));
-  struct b_tree_node_t *non_bst_root = DF_NODE(10, DF_NODE(6, DF_LEAF(7), DF_LEAF(3)), DF_NODE(12, DF_LEAF(11), DF_LEAF(15)));
-  struct b_tree_node_t *non_bst_root_2 = DF_NODE(10, DF_NODE(6, DF_LEAF(3), DF_LEAF(7)), DF_NODE(12, DF_LEAF(9), DF_LEAF(15)));
+    struct b_tree_node_t *bst_root = DF_NODE(10, DF_NODE(6, DF_LEAF(3), DF_LEAF(7)), DF_NODE(12, DF_LEAF(11), DF_LEAF(15)));
+    struct b_tree_node_t *non_bst_root = DF_NODE(10, DF_NODE(6, DF_LEAF(7), DF_LEAF(3)), DF_NODE(12, DF_LEAF(11), DF_LEAF(15)));
+    struct b_tree_node_t *non_bst_root_2 = DF_NODE(10, DF_NODE(6, DF_LEAF(3), DF_LEAF(7)), DF_NODE(12, DF_LEAF(9), DF_LEAF(15)));
 
-  printf("is bst %u should be 1\n", btree_is_bst(bst_root));
-  printf("is bst %u should be 0\n", btree_is_bst(non_bst_root));
-  printf("is bst %u should be 0\n", btree_is_bst(non_bst_root_2));
+    printf("is bst %u should be 1\n", btree_is_bst(bst_root));
+    printf("is bst %u should be 0\n", btree_is_bst(non_bst_root));
+    printf("is bst %u should be 0\n", btree_is_bst(non_bst_root_2));
 }
