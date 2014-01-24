@@ -70,25 +70,25 @@ int string_match_regexp(char *str, char *pattern)
    /*
     * Only match if we reached the end of the string as well...
     */
-   return (*str) ? 0 : 1;
+   return !*str;
 }
 
 int main()
 {
-   printf("%u\n", string_match_regexp("abc", "abc"));
-   printf("%u\n", string_match_regexp("abc", "a*bc"));
-   printf("%u\n", string_match_regexp("aaaaaaabc", "c*bc"));
-   printf("%u\n", string_match_regexp("aaaaaaabc", "a.*bc"));
-   printf("%u\n", string_match_regexp("abbbbaaaaaabc", "ab*a*b*c"));
-   printf("%u\n", string_match_regexp("abbbbaaaaaabc", "ab*a*h*bc"));
-   printf("%u\n", string_match_regexp("bbd", "b*bbd"));
-   printf("%u\n", string_match_regexp("bbd", ".*bbd"));
-   printf("%u\n", string_match_regexp("bbd", ".*cbd"));
-   printf("%u\n", string_match_regexp("", ".*"));
-   printf("%u\n", string_match_regexp("", ".*c*"));
-   printf("%u\n", string_match_regexp("bbbbdbdbdaac", ".*d"));
-   printf("%u\n", string_match_regexp("bbbb", "b*c*"));
-   printf("%u\n", string_match_regexp("bbbb", "b*b*c*"));
-   printf("%u\n", string_match_regexp("abcd", ".*d"));
-   printf("%u\n", string_match_regexp("abcd", ".*d*c*c*e*hhh*j*.*c*h"));
+    printf("(1) %u expect 1\n", string_match_regexp("abc", "abc"));
+    printf("(2) %u expect 1\n", string_match_regexp("abc", "a*bc"));
+    printf("(3) %u expect 0\n", string_match_regexp("aaaaaaabc", "c*bc"));
+    printf("(4) %u expect 1\n", string_match_regexp("aaaaaaabc", "a.*bc"));
+    printf("(5) %u expect 1\n", string_match_regexp("abbbbaaaaaabc", "ab*a*b*c"));
+    printf("(6) %u expect 1\n", string_match_regexp("abbbbaaaaaabc", "ab*a*h*bc"));
+    printf("(7) %u expect 1\n", string_match_regexp("bbd", "b*bbd"));
+    printf("(8) %u expect 1\n", string_match_regexp("bbd", ".*bbd"));
+    printf("(9) %u expect 0\n", string_match_regexp("bbd", ".*cbd"));
+    printf("(10) %u expect 1\n", string_match_regexp("", ".*"));
+    printf("(11) %u expect 1\n", string_match_regexp("", ".*c*"));
+    printf("(12) %u expect 0\n", string_match_regexp("bbbbdbdbdaac", ".*d"));
+    printf("(13) %u expect 1\n", string_match_regexp("bbbb", "b*c*"));
+    printf("(14) %u expect 1\n", string_match_regexp("bbbb", "b*b*c*"));
+    printf("(15) %u expect 1\n", string_match_regexp("abcd", ".*d"));
+    printf("(16) %u expect 0\n", string_match_regexp("abcd", ".*d*c*c*e*hhh*j*.*c*h"));
 }
