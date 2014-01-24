@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -10,32 +11,53 @@
  */
 
 static void
-do_combine_str(char *str, char *result_str, int start, int pos, int str_len)
+do_process_solution(char *str, int *is_present, int n_char)
 {
-   int idx;
+    int idx;
 
-   for (idx = start; idx < str_len; idx++) {
-      result_str[pos] = str[idx];
-      // print the combination here
-      do_combine_str(str, result_str, idx + 1, pos + 1, str_len);
-   }
-   result_str[pos] = '\0';
+    for (idx = 0; idx < n_char; idx++) {
+        if (is_present[idx]) {
+            printf("%c", str[idx]);
+        }
+    }
+    printf("\n");
+}
+
+static void
+do_combine_str(char *str, int *is_present, int pos, int n_char)
+{
+    int idx;
+    int c_state[2] = {0, 1};
+
+    if (pos == n_char) {
+        do_process_solution(str, is_present, n_char);
+        return;
+    }
+
+    for (idx = 0; idx < 2; idx++) {
+        is_present[pos] = c_state[idx];
+        do_combine_str(str, is_present, pos+1, n_char);
+    }
 }
 
 int
 combine_str(char *str)
 {
-   char *result_str;
-   int str_len = strlen(str);
+    int *is_present;
+    int n_char = strlen(str);
 
-   result_str = malloc(str_len + 1);
-   if (!result_str) {
-      return -1;
-   }
-   memset(result_str, 0, str_len + 1);
+    is_present = malloc(n_char);
+    if (!is_present) {
+        return -1;
+    }
 
-   do_combine_str(str, result_str, 0, 0, str_len);
+    do_combine_str(str, is_present, 0, n_char);
 
-   free(result_str);
-   return 0;
+    free(is_present);
+    return 0;
+}
+
+int main()
+{
+    combine_str("abc");
 }
