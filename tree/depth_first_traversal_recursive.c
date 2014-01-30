@@ -3,15 +3,16 @@
 #include "tree.h"
 
 void
-btree_depth_first_traversal_recursive(struct b_tree_node_t *root)
+btree_depth_first_traversal_recursive(struct b_tree_node_t *root,
+                                      void (*v)(struct b_tree_node_t *))
 {
    if (root == NULL) {
       return;
    }
 
-   depth_first_traversal_recursive(root->left);
-   /* process root */
-   depth_first_traversal_recursive(root->right);
+   btree_depth_first_traversal_recursive(root->left, v);
+   (*v)(root);
+   btree_depth_first_traversal_recursive(root->right, v);
 }
 
 
