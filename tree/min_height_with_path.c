@@ -4,8 +4,6 @@
  * Given a binary tree find its minimum height and the according nodes path.
  */
 
-#define MIN(a,b) ((a<b) ? a : b)
-
 static unsigned int
 btree_min_height_path_rec(struct b_tree_node_t *root,
                           unsigned int cheight,
