@@ -80,15 +80,15 @@ struct {                                                                        
 
 #define NB_TREES (sizeof(trees)/((char *)&trees[1] - (char *)trees))
 
-#define ITERATE_TREES(_f, _fmt, _args ...)                        \
-   do {                                                           \
-      int idx;                                                    \
-      MK_TREES();                                                 \
-      for (idx = 0; idx < NB_TREES; idx++) {                      \
+#define ITERATE_TREES(_f, _fmt, _args ...)                                \
+   do {                                                                   \
+      int idx;                                                            \
+      MK_TREES();                                                         \
+      for (idx = 0; idx < NB_TREES; idx++) {                              \
          printf("running %s against %s returned ", #_f, trees[idx].name); \
-         printf(_fmt, _f(trees[idx].root, ##_args));              \
-         printf("\n");                                            \
-               }                                                  \
+         printf(_fmt, _f(trees[idx].root, ##_args));                      \
+         printf("\n");                                                    \
+      }                                                                   \
    } while(0);
 
 typedef void *fifo_t;
