@@ -45,8 +45,11 @@ int string_match_regexp(char *str, char *pattern)
        * the way.
        */
       if (*(pattern + 1) == '*') {
-         while (*str && (*pattern == *str || *pattern == '.')) {
-            if (string_match_regexp(str++, pattern+2)) {
+          int n_eat = 0;
+
+          while (*(str+n_eat) && (*pattern == *(str+n_eat) || *pattern == '.')) {
+            n_eat++;
+            if (string_match_regexp(str+n_eat, pattern+2)) {
                return 1;
             }
          }
