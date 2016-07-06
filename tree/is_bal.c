@@ -22,7 +22,12 @@ btree_height(struct b_tree_node_t *root)
 int
 btree_is_bal(struct b_tree_node_t *root)
 {
-    return abs(btree_height(root->left) - btree_height(root->right)) <= 1;
+    if (root == NULL) {
+      return 1;
+    }
+
+    return btree_is_bal(root->left) && btree_is_bal(root->right) &&
+           abs(btree_height(root->left) - btree_height(root->right)) <= 1;
 }
 
 int main()
@@ -30,8 +35,10 @@ int main()
     struct b_tree_node_t *bal_root = DF_NODE(1, DF_NODE(2, DF_LEAF(3), DF_LEAF(4)), DF_NODE(2, DF_LEAF(4), DF_LEAF(3)));
     struct b_tree_node_t *bal_root_2 = DF_NODE(1, DF_NODE(2, DF_NODE(3, DF_LEAF(5), NULL), DF_LEAF(4)), DF_NODE(2, DF_LEAF(4), DF_NODE(3, NULL, DF_LEAF(5))));
     struct b_tree_node_t *non_bal_root = DF_NODE(1, DF_NODE(2, DF_LEAF(4), DF_NODE(3, DF_LEAF(7), DF_NODE(5, DF_LEAF(6), NULL))), DF_LEAF(2));
+    struct b_tree_node_t *non_bal_root_2 = DF_NODE(1, DF_NODE(2, DF_NODE(3, DF_LEAF(4), NULL), NULL), DF_NODE(5, NULL, DF_NODE(6, NULL, DF_LEAF(7))));
 
     printf("is bal %u should be 1\n", btree_is_bal(bal_root));
     printf("is bal %u should be 1\n", btree_is_bal(bal_root_2));
     printf("is bal %u should be 0\n", btree_is_bal(non_bal_root));
+    printf("is bal %u should be 0\n", btree_is_bal(non_bal_root_2));
 }
